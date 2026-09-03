@@ -45,7 +45,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'admin'])->name('admin.dashboard');
 
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('admin.kategori.index');
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
 
     Route::get('/roles', [RoleController::class, 'index'])->name('admin.roles.index');
     Route::post('/roles', [RoleController::class, 'store'])->name('admin.roles.store');
