@@ -10,7 +10,34 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Kategori::paginate(10);
-        return $this->view('kategori.index', compact('data'));
+        $data = Kategori::orderBy('id_kategori','desc')
+        
+        ->paginate(10);
+        return view('kategori.index', compact('data'));
+    }
+    public function create(Request $request)
+    {
+        return view('kategori.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'keterangan' => 'required|string|max:255',
+        ]);
+
+        Kategori::create([
+            'keterangan' => $request->input('keterangan'),
+        ]);
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+     
+    public function delete(Request $request, $id)
+    {
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }
