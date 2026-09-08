@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>ID</th>
                 <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
@@ -21,10 +20,9 @@
             @foreach ($data as $kategori)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $kategori->id_kategori }}</td>
                     <td>{{ $kategori->keterangan }}</td>
                     <td>
-                        <a href="" class="btn btn-success btn-sm">Edit</a>
+                        <a href="{{ route('kategori.edit', ['id' => $kategori->id_kategori]) }}" class="btn btn-success btn-sm">Edit</a>
                         <form action="{{ route('kategori.delete', ['id' => $kategori->id_kategori]) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
